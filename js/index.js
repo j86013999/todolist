@@ -381,15 +381,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
     document.addEventListener("click", function(e){
 
-      let starAtt = e.target.closest("span.star").getAttribute("data-star");
-      let starNum = e.target.closest("div.star_block").querySelectorAll("span.star");
+      // console.log(e.target.closest("span.star"))
 
+      if(e.target.closest("span.star")){
 
-
-      if(e.target.closest("span.star").classList.contains("star")){
-
+        let starAtt = e.target.closest("span.star").getAttribute("data-star");
+        let starNum = e.target.closest("div.star_block").querySelectorAll("span.star");
         
-
         for( let i = 0; i < starNum.length; i++ ){
           starNum[i].classList.remove("-on")
           
@@ -398,24 +396,24 @@ document.addEventListener("DOMContentLoaded", function(){
             starNum[j].classList.add("-on")
 
           }
-
-        } 
-      }
-
-
-      // 取得待辦事項的 id
-      let item_id = e.target.closest("li").getAttribute("data-id");
-
-      // 從 localStorage 取得資料
-      let tasks = JSON.parse(localStorage.getItem("tasks"));
-      tasks.forEach(function(task, i){
-        if(item_id == task.item_id){ // id 相同
-          tasks[i].star = starAtt; // 更新星號數
         }
-      });
+        // 取得待辦事項的 id
+        let item_id = e.target.closest("li").getAttribute("data-id");
 
-      // 回存至 localStorage
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+        // 從 localStorage 取得資料
+        let tasks = JSON.parse(localStorage.getItem("tasks"));
+        tasks.forEach(function(task, i){
+          if(item_id == task.item_id){ // id 相同
+            tasks[i].star = starAtt; // 更新星號數
+          }
+        });
+
+        // 回存至 localStorage
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+
+      
 
     })
 
@@ -423,6 +421,23 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     
+    // document.addEventListener("click", function(e){
+    //   if(e.target.closest("span")){
+    //     let span_el = e.target.closest("span");
+    //     if(span_el.classList.contains("star")){
+    
+    //       let current_star = parseInt(span_el.getAttribute("data-star"));
+    //       let star_span = span_el.closest("div.star_block").querySelectorAll("span.star");
+    //       //console.log(star_span);
+    //       star_span.forEach(function(star_item, i){
+    
+    //         if( parseInt(star_item.getAttribute("data-star")) <= current_star ){
+    //           star_span[i].classList.add("-on");
+    //         }else{
+    //           star_span[i].classList.remove("-on");
+    //         }
+    
+    //       });
 
     
 
