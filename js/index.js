@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(){
     task_add.addEventListener("click", function(){
     
       
-      let task_text = (input_task_name.value).trim();
+      let task_text = (input_task_name.value).trim()
   
       if( task_text != "" ){
   
@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function(){
               <span class="star" data-star="4"><i class="fas fa-star"></i></span>
               <span class="star" data-star="5"><i class="fas fa-star"></i></span>
             </div>
-            <p class="para">${input_task_name.value}</p>                
-            <input type="text" class="task_name_update -none" placeholder="更新待辦事項…" value="${input_task_name.value}">
+            <p class="para">${task_text}</p>                
+            <input type="text" class="task_name_update -none" placeholder="更新待辦事項…" value="${task_text}">
           </div>
           <div class="right_block">
             <div class="btn_flex">
@@ -296,15 +296,15 @@ document.addEventListener("DOMContentLoaded", function(){
     // 往上按鈕
     document.addEventListener("click", function(e){
       if(e.target.classList.contains("btn_up")){
-
         let item_id = e.target.closest("ul>li").getAttribute("data-id");
+        
 
-        items_sort(item_id, "up");
-
+        
         let li = e.target.closest("ul>li");
         let previousLi = e.target.closest("ul>li").previousElementSibling
-
-        if(previousLi != null){
+        
+        if(previousLi != null && item_id != null){
+          items_sort(item_id, "up");
           previousLi.insertAdjacentHTML("beforebegin", li.outerHTML);
         li.remove();
         }
@@ -319,12 +319,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
         let item_id = e.target.closest("ul>li").getAttribute("data-id");
 
-        items_sort(item_id, "down");
-
+        
         let li = e.target.closest("ul>li");                        // 不能只寫li?
         let nextLi = e.target.closest("ul>li").nextElementSibling
-
-        if(nextLi != null){
+        
+        if(nextLi != null && item_id != null){
+          items_sort(item_id, "down");
           nextLi.insertAdjacentHTML("afterend", li.outerHTML);
         li.remove();
         }
